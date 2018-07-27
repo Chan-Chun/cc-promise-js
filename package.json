@@ -1,5 +1,5 @@
 {
-  "name": "cc-promise",
+  "name": "cc-promise-js",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chan-Chun/cc-promise.git"
+    "url": "git+https://github.com/Chan-Chun/cc-promise-js.git"
   },
   "author": "Chan-Chun",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Chan-Chun/cc-promise/issues"
+    "url": "https://github.com/Chan-Chun/cc-promise-js/issues"
   },
-  "homepage": "https://github.com/Chan-Chun/cc-promise#readme"
+  "homepage": "https://github.com/Chan-Chun/cc-promise-js#readme"
 }
