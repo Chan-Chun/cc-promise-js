@@ -1,1 +1,1 @@
-const { promiseSome, promiseAny } = require('./lib/promise')
+module.exports = require('./lib/promise')

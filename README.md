@@ -1,3 +1,3 @@
 # cc-promise-js
 
-## some promise usage
+* promise.any()
