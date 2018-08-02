@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test"
+    "test": "mocha ./test",
+    "lint": "eslint ./lib ./test"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/Chan-Chun/cc-promise-js#readme",
   "devDependencies": {
-    "mocha": "^5.2.0"
-  }
+    "eslint": "^5.2.0",
+    "mocha": "^5.2.0",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
