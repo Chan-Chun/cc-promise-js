@@ -1,4 +1,4 @@
-const { promiseAny, promiseSome } = require('../lib/promise')
+const { promiseAny, promiseSome, PromiseCanCancel } = require('../lib/promise')
 const assert = require('assert')
 
 const testArray = [
@@ -7,7 +7,7 @@ const testArray = [
       reject(1)
     }, 1000)
   }),
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     setTimeout(() => {
       resolve(2)
     }, 2000)
@@ -17,14 +17,14 @@ const testArray = [
       reject(3)
     }, 3000)
   }),
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     setTimeout(() => {
       resolve(4)
     }, 4000)
   })
 ]
 
-describe('promise', () => {
+describe('promise some && promise any', () => {
   it('promise-any', () => {
     promiseAny(testArray).then(res => {
       assert.equal(res, 2)
@@ -37,3 +37,45 @@ describe('promise', () => {
     })
   })
 })
+
+describe('promise can cancel', () => {
+  it('promise-can-cancel-cancel', () => {
+    const aCanCancelPromise = new PromiseCanCancel((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, 10000)
+    }, onCancel => {
+      onCancel(() => {
+        console.log('It cancel')
+      })
+    })
+    setTimeout(() => {
+      aCanCancelPromise.cancel('I just wanna cancel')
+    }, 5000)
+    aCanCancelPromise.then(res => {
+      assert.ifError(res)
+    }).catch(err => {
+      assert.ifError(err)
+    })
+  })
+  it('promise-can-cancel-not-cancel', () => {
+    const aCanCancelPromise = new PromiseCanCancel((resolve) => {
+      setTimeout(() => {
+        resolve('Should display')
+      }, 2000)
+    }, onCancel => {
+      onCancel(() => {
+        console.log('It cancel')
+      })
+    })
+    setTimeout(() => {
+      aCanCancelPromise.cancel('I just wanna cancel anyway')
+    }, 5000)
+    aCanCancelPromise.then(value => {
+      assert.equal(value, 'Should display')
+    }).catch(err => {
+      assert.ifError(err)
+    })
+  })
+})
+
