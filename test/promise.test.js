@@ -1,4 +1,10 @@
-const { promiseAny, promiseSome, PromiseCanCancel } = require('../lib/promise')
+const {
+  promiseAny,
+  promiseSome,
+  promiseAllDone,
+  PromiseCanCancel
+} = require('../lib/promise')
+
 const assert = require('assert')
 
 const testArray = [
@@ -38,6 +44,14 @@ describe('promise some && promise any', () => {
   })
 })
 
+describe('promise all done', () => {
+  it('promise-all-done', () => {
+    promiseAllDone(testArray).then(res => {
+      assert.equal(res, [1, 2, 3, 4])
+    })
+  })
+})
+
 describe('promise can cancel', () => {
   it('promise-can-cancel-cancel', () => {
     const aCanCancelPromise = new PromiseCanCancel((resolve) => {
@@ -58,6 +72,7 @@ describe('promise can cancel', () => {
       assert.ifError(err)
     })
   })
+
   it('promise-can-cancel-not-cancel', () => {
     const aCanCancelPromise = new PromiseCanCancel((resolve) => {
       setTimeout(() => {
@@ -78,4 +93,5 @@ describe('promise can cancel', () => {
     })
   })
 })
+
 
