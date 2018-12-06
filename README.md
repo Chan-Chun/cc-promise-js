@@ -1,3 +1,6 @@
 # cc-promise-js
 
-* promise.any()
+* promiseAny()
+* promiseAllDone()
+* promiseSome()
+* PromiseCanCancel()
