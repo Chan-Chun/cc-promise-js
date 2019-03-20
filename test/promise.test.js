@@ -1,5 +1,6 @@
 const {
   promiseAny,
+  promiseOnce,
   promiseSome,
   promiseAllDone,
   PromiseCanCancel
@@ -29,6 +30,17 @@ const testArray = [
     }, 4000)
   })
 ]
+
+describe('promise once', () => {
+  it('promise-once', () => {
+    let counter = 0
+    const promise = promiseOnce(() => Promise.resolve(++counter))
+    promise().then(i => assert.equal(i, 1))
+    promise().then(i => assert.equal(i, 1))
+    promise().then(i => assert.equal(i, 1))
+    promise().then(i => assert.equal(i, 1))
+  })
+})
 
 describe('promise some && promise any', () => {
   it('promise-any', () => {
