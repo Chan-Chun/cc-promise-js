@@ -9,7 +9,7 @@ const {
 const assert = require('assert')
 
 const testArray = [
-  new Promise((resolve, reject) => {
+  new Promise((_, reject) => {
     setTimeout(() => {
       reject(1)
     }, 1000)
@@ -19,7 +19,7 @@ const testArray = [
       resolve(2)
     }, 2000)
   }),
-  new Promise((resolve, reject) => {
+  new Promise((_, reject) => {
     setTimeout(() => {
       reject(3)
     }, 3000)
